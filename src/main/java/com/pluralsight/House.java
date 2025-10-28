@@ -7,7 +7,10 @@ public class House extends Asset{
     private int squareFoot;
     private int lotSize;
 
-    public House(String description, String dateAcquired, double originalCost, String address, int condition, int squareFoot, int lotSize) {
+
+    //CONSTRUCTOR
+    public House(String description, String dateAcquired, double originalCost,
+                 String address, int condition, int squareFoot, int lotSize) {
         super(description, dateAcquired, originalCost);
         this.address = address;
         this.condition = condition;
@@ -54,17 +57,25 @@ public class House extends Asset{
     public double getValue(){
 
         int condition = getCondition();
+        double pricePerSquareFoot = 0.00;
 
         switch (condition){
             case 1:
-                180.00 * getSquareFoot();
+                pricePerSquareFoot = 180.00;
+                break;
+            case 2:
+                pricePerSquareFoot = 130.00;
+                break;
+            case 3:
+                pricePerSquareFoot = 90.00;
+                break;
+            case 4:
+                pricePerSquareFoot = 80.00;
+                break;
+            default:
+                pricePerSquareFoot = 0.00;
         }
-
-        if(getLotSize()==1){
-            double value = 180.00 * getSquareFoot();
-        }
-
-
+        return (pricePerSquareFoot * getSquareFoot()) + 0.25 * getLotSize();
 
         // A house's value is determined as
         // $180.00 per square foot (excellent)
@@ -74,8 +85,10 @@ public class House extends Asset{
         // PLUS  25 cents per square foot of lot size
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + String.format("Address: %-19s | Condition: %-12s | Square Foot: %-17d | Lot Size: %-13d" ,address,condition,squareFoot,lotSize);
 
 
-
-
+    }
 }

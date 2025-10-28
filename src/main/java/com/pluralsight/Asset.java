@@ -14,6 +14,7 @@ public class Asset {
     }
 
 
+
     //GETTERS AND SETTERS
     public String getDescription() {
         return description;
@@ -43,4 +44,8 @@ public class Asset {
         return originalCost;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Asset: %-13s | Date Acquired: %-12s | Original Price: %-17f |" ,description,dateAcquired,originalCost);
+    }
 }
